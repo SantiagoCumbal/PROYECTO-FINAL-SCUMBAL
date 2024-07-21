@@ -1,2 +1,7 @@
-package org.example;public class Login {
+package org.example;
+
+import javax.swing.*;
+
+public class Login {
+    public JPanel MainPanel;
 }
