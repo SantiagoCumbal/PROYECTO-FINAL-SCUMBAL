@@ -37,7 +37,7 @@ public class Login {
                             if(admin.getCorreo().equals(resultSet.getString("correo")) && admin.getCedula().equals(resultSet.getString("cedula"))){
                                 System.out.println("Ingreso exitoso");
                                 JFrame frame = new JFrame();
-                                frame.setContentPane(new form1().MainPanel);
+                                frame.setContentPane(new InicioAdministracion().MainPanel);
                                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 frame.setSize(300,300);
                                 frame.setVisible(true);
@@ -49,7 +49,6 @@ public class Login {
                             }
                         }
                     } else if (opcion.equals("Jugador")) {
-                        System.out.println(comboBox1.getSelectedItem());
                         String query="select * from jugadores";
                         Statement statement=connection.createStatement();
                         ResultSet resultSet=statement.executeQuery(query);
@@ -60,7 +59,7 @@ public class Login {
                             if(jug.getCorreo().equals(resultSet.getString("correo")) && jug.getCedula().equals(resultSet.getString("cedula"))){
                                 System.out.println("Ingreso exitoso");
                                 JFrame frame = new JFrame();
-                                frame.setContentPane(new form1().MainPanel);
+                                frame.setContentPane(new InicioAdministracion().MainPanel);
                                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 frame.setSize(300,300);
                                 frame.setVisible(true);
@@ -72,7 +71,6 @@ public class Login {
                             }
                         }
                     } else if (opcion.equals("Encargado")) {
-                        System.out.println(comboBox1.getSelectedItem());
                         String query="select * from encargado";
                         Statement statement=connection.createStatement();
                         ResultSet resultSet=statement.executeQuery(query);
@@ -83,7 +81,7 @@ public class Login {
                             if(enc.getCorreo().equals(resultSet.getString("correo")) && enc.getCedula().equals(resultSet.getString("cedula"))){
                                 System.out.println("Ingreso exitoso");
                                 JFrame frame = new JFrame();
-                                frame.setContentPane(new form1().MainPanel);
+                                frame.setContentPane(new InicioAdministracion().MainPanel);
                                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 frame.setSize(300,300);
                                 frame.setVisible(true);
@@ -95,7 +93,6 @@ public class Login {
                             }
                         }
                     }
-
 
                 }catch(SQLException e1){
                     System.out.println(e1.getMessage());
