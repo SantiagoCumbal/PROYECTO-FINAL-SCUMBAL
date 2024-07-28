@@ -4,11 +4,13 @@ public class Administradores {
     public String cedula;
     public String nombre;
     public String correo;
+    public String contraseña;
     public Administradores() {}
-    public Administradores(String cedula, String nombre, String correo) {
+    public Administradores(String cedula, String nombre, String correo, String contraseña) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
+        this.contraseña = contraseña;
     }
 
     public String getCedula() {
@@ -33,5 +35,13 @@ public class Administradores {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 }
