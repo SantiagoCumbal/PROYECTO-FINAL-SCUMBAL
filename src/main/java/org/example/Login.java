@@ -1,4 +1,6 @@
 package org.example;
+import org.example.AdministradorETC.InicioAdministracion;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,7 +44,7 @@ public class Login {
                                 frame.setContentPane(new InicioAdministracion(admin.getNombre()).MainPanel);
                                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
-                                frame.setSize(300,300);
+                                frame.setSize(500,300);
                                 frame.setVisible(true);
                                 ((JFrame)SwingUtilities.getWindowAncestor(iniciarSesionButton)).dispose();
                             }else{
@@ -57,15 +59,17 @@ public class Login {
                         Statement statement=connection.createStatement();
                         ResultSet resultSet=statement.executeQuery(query);
                         enc.setCorreo(usuarioT.getText());
-                        enc.setCedula(contraseñaT.getText());
+                        String Contraseña = contraseñaT.getText();
+                        String contraseñaDe = generateHash(Contraseña);
+                        enc.setContraseña(contraseñaDe);
 
                         while(resultSet.next()){
-                            if(enc.getCorreo().equals(resultSet.getString("correo")) && enc.getCedula().equals(resultSet.getString("cedula"))){
+                            if(enc.getCorreo().equals(resultSet.getString("correo")) && enc.getContraseña().equals(resultSet.getString("contraseña"))){
                                 JFrame frame = new JFrame();
-                                frame.setContentPane(new InicioAdministracion(admin.getNombre()).MainPanel);
+                                frame.setContentPane(new InicioAdministracion(enc.getNombre()).MainPanel);
                                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
-                                frame.setSize(300,300);
+                                frame.setSize(700,700);
                                 frame.setVisible(true);
                                 ((JFrame)SwingUtilities.getWindowAncestor(iniciarSesionButton)).dispose();
                             }else{

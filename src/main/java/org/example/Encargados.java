@@ -4,13 +4,21 @@ public class Encargados {
     public String cedula;
     public String nombre;
     public String correo;
+    public int edad;
+    public String contraseña;
+    public String telefono;
+    public String direccion;
 
     public Encargados() {}
 
-    public Encargados(String cedula, String nombre, String correo) {
+    public Encargados(String cedula, String nombre, String correo, int edad, String contraseña, String direccion, String telefono) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
+        this.edad = edad;
+        this.contraseña = contraseña;
+        this.direccion = direccion;
+        this.telefono = telefono;
     }
 
     public String getCedula() {
@@ -37,5 +45,35 @@ public class Encargados {
         this.correo = correo;
     }
 
+    public int getEdad() {
+        return edad;
+    }
 
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 }
