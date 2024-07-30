@@ -1,5 +1,6 @@
 package org.example;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -36,9 +37,11 @@ public class Login {
 
                         while(resultSet.next()){
                             if(admin.getCorreo().equals(resultSet.getString("correo")) && admin.getContraseña().equals(resultSet.getString("contraseña"))){
+                                admin.setNombre(resultSet.getString("nombre"));
                                 JFrame frame = new JFrame();
-                                frame.setContentPane(new InicioAdministracion().MainPanel);
+                                frame.setContentPane(new InicioAdministracion(admin.getNombre()).MainPanel);
                                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
                                 frame.setSize(300,300);
                                 frame.setVisible(true);
                                 ((JFrame)SwingUtilities.getWindowAncestor(iniciarSesionButton)).dispose();
@@ -59,8 +62,9 @@ public class Login {
                         while(resultSet.next()){
                             if(enc.getCorreo().equals(resultSet.getString("correo")) && enc.getCedula().equals(resultSet.getString("cedula"))){
                                 JFrame frame = new JFrame();
-                                frame.setContentPane(new InicioAdministracion().MainPanel);
+                                frame.setContentPane(new InicioAdministracion(admin.getNombre()).MainPanel);
                                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
                                 frame.setSize(300,300);
                                 frame.setVisible(true);
                                 ((JFrame)SwingUtilities.getWindowAncestor(iniciarSesionButton)).dispose();
