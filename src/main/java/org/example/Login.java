@@ -1,5 +1,6 @@
 package org.example;
 import org.example.AdministradorETC.InicioAdministracion;
+import org.example.EncargadoETC.InicioEncargado;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,7 +56,7 @@ public class Login {
                         }
 
                     } else if (opcion.equals("Encargado")) {
-                        String query="select * from encargado";
+                        String query="select * from encargados";
                         Statement statement=connection.createStatement();
                         ResultSet resultSet=statement.executeQuery(query);
                         enc.setCorreo(usuarioT.getText());
@@ -66,7 +67,7 @@ public class Login {
                         while(resultSet.next()){
                             if(enc.getCorreo().equals(resultSet.getString("correo")) && enc.getContraseña().equals(resultSet.getString("contraseña"))){
                                 JFrame frame = new JFrame();
-                                frame.setContentPane(new InicioAdministracion(enc.getNombre()).MainPanel);
+                                frame.setContentPane(new InicioEncargado().MainPanel);
                                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
                                 frame.setSize(700,700);

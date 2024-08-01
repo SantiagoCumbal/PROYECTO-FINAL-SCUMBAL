@@ -2,17 +2,13 @@ package org.example.AdministradorETC;
 
 import org.example.Administradores;
 import org.example.Encargados;
-
 import javax.swing.*;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -45,6 +41,7 @@ public class AgregarEncargados {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try(Connection connection = DriverManager.getConnection(url,usuario,contraseña)){
+
                     if(cedulaT.getText().equals("")||correoT.getText().equals("")||nombreT.getText().equals("")||contraseñaT.getText().equals("")||telefonoT.getText().equals("")||direccionT.getText().equals("")){
                         Error.setText("NO SE PUDO GUARDAR POR FAVOR INGRESE BIEN LOS PARAMETROS");
                     }else{
@@ -67,12 +64,24 @@ public class AgregarEncargados {
                         ps.setString(7,enc.getDireccion());
                         ps.executeUpdate();
                         Error.setText("GUARDADO CON EXITO");
-
                     }
-
                 }catch (SQLException e1){
                     System.out.println(e1.getMessage());
+                    Error.setText("Ya existe un encargado con esa cedula o correo");
                 }
+            }
+        });
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cedulaT.setText("");
+                correoT.setText("");
+                nombreT.setText("");
+                edadS.setValue(18);
+                telefonoT.setText("");
+                direccionT.setText("");
+                contraseñaT.setText("");
+                Error.setText("");
             }
         });
     }

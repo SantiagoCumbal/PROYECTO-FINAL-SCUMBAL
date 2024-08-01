@@ -81,7 +81,6 @@
                         <properties>
                           <model>
                             <item value="Administrador"/>
-                            <item value="Jugador"/>
                             <item value="Encargado"/>
                           </model>
                         </properties>
