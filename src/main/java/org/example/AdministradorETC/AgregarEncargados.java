@@ -41,29 +41,38 @@ public class AgregarEncargados {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try(Connection connection = DriverManager.getConnection(url,usuario,contraseña)){
-
                     if(cedulaT.getText().equals("")||correoT.getText().equals("")||nombreT.getText().equals("")||contraseñaT.getText().equals("")||telefonoT.getText().equals("")||direccionT.getText().equals("")){
                         Error.setText("NO SE PUDO GUARDAR POR FAVOR INGRESE BIEN LOS PARAMETROS");
-                    }else{
-                        enc.setCedula(cedulaT.getText());
-                        enc.setCorreo(correoT.getText());
-                        enc.setNombre(nombreT.getText());
-                        enc.setEdad(Integer.parseInt(edadS.getValue().toString()));
-                        String Contraseña = contraseñaT.getText();
-                        String contraseñaDe = generateHash(Contraseña);
-                        enc.setContraseña(contraseñaDe);
-                        enc.setTelefono(telefonoT.getText());
-                        enc.setDireccion(direccionT.getText());
-                        PreparedStatement ps=connection.prepareStatement(sql);
-                        ps.setString(1,enc.getCedula());
-                        ps.setString(2,enc.getCorreo());
-                        ps.setString(3,enc.getNombre());
-                        ps.setInt(4,enc.getEdad());
-                        ps.setString(5, enc.getContraseña());
-                        ps.setString(6,enc.getTelefono());
-                        ps.setString(7,enc.getDireccion());
-                        ps.executeUpdate();
-                        Error.setText("GUARDADO CON EXITO");
+                    } else{
+                        if (verificarCorreo(correoT.getText()) && verificarCedula(cedulaT.getText()) && verificarTelefono(telefonoT.getText())){
+                            enc.setCedula(cedulaT.getText());
+                            enc.setCorreo(correoT.getText());
+                            enc.setNombre(nombreT.getText());
+                            enc.setEdad(Integer.parseInt(edadS.getValue().toString()));
+                            String Contraseña = contraseñaT.getText();
+                            String contraseñaDe = generateHash(Contraseña);
+                            enc.setContraseña(contraseñaDe);
+                            enc.setTelefono(telefonoT.getText());
+                            enc.setDireccion(direccionT.getText());
+                            PreparedStatement ps=connection.prepareStatement(sql);
+                            ps.setString(1,enc.getCedula());
+                            ps.setString(2,enc.getCorreo());
+                            ps.setString(3,enc.getNombre());
+                            ps.setInt(4,enc.getEdad());
+                            ps.setString(5, enc.getContraseña());
+                            ps.setString(6,enc.getTelefono());
+                            ps.setString(7,enc.getDireccion());
+                            ps.executeUpdate();
+                            Error.setText("GUARDADO CON EXITO");
+                        }else{
+                            if (!verificarCorreo(correoT.getText())) {
+                                Error.setText("Correo invalido");
+                            } else if (!verificarCedula(cedulaT.getText())) {
+                                Error.setText("Cédula inválida");
+                            } else if (!verificarTelefono(telefonoT.getText())) {
+                                Error.setText("Número de teléfono inválido");
+                            }
+                        }
                     }
                 }catch (SQLException e1){
                     System.out.println(e1.getMessage());
@@ -105,5 +114,18 @@ public class AgregarEncargados {
             hexString.append(hex);
         }
         return hexString.toString();
+    }
+
+    public boolean verificarCorreo(String correo){
+        String verficar = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return correo.matches(verficar);
+    }
+    public boolean verificarCedula(String cedula){
+        String verficar = "^[0-9]{10}$";
+        return cedula.matches(verficar);
+    }
+    public boolean verificarTelefono(String telefono){
+        String verficar = "^[0-9]{10}$";
+        return telefono.matches(verficar);
     }
 }
