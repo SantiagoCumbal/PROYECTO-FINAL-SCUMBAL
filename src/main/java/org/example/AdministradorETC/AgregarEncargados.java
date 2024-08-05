@@ -1,16 +1,14 @@
 package org.example.AdministradorETC;
 
-import org.example.Administradores;
 import org.example.Encargados;
 import javax.swing.*;
 import javax.swing.SpinnerNumberModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class AgregarEncargados {
     private JTextField cedulaT;
@@ -24,13 +22,16 @@ public class AgregarEncargados {
     private JButton cancelarButton;
     public JPanel MainPanel;
     private JLabel Error;
+    private JButton regresarButton;
+    private String nombreAdmin;
     String url="jdbc:mysql://localhost:3306/Futbolito";
     String usuario = "root";
     String contraseña= "12345";
     Encargados enc = new Encargados();
     String sql="INSERT INTO encargados (cedula, correo, nombre, edad, contraseña, numero_telefono, direccion) VALUES (?,?,?,?,?,?,?)";
 
-    public AgregarEncargados() {
+    public AgregarEncargados(String nombreAdmin) {
+        this.nombreAdmin = nombreAdmin;
         int inicial=18;
         int minimo=18;
         int maximo=70;
@@ -91,6 +92,18 @@ public class AgregarEncargados {
                 direccionT.setText("");
                 contraseñaT.setText("");
                 Error.setText("");
+            }
+        });
+        regresarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame();
+                frame.setContentPane(new InicioAdministracion(nombreAdmin).MainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
+                frame.setSize(500,300);
+                frame.setVisible(true);
+                ((JFrame)SwingUtilities.getWindowAncestor(regresarButton)).dispose();
             }
         });
     }
