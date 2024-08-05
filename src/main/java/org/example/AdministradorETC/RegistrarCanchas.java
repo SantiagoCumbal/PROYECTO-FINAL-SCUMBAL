@@ -12,15 +12,35 @@ public class RegistrarCanchas {
     private JButton guardarButton;
     private JButton cancelarButton;
     private JLabel Error;
-    private JComboBox estadoT;
-    private JSpinner capacidad1;
+    private JRadioButton a22JugadoresRadioButton;
+    private JRadioButton a10JugadoresRadioButton;
+    private JRadioButton a14JugadoresRadioButton;
 
     public RegistrarCanchas() {
-        guardarButton.addActionListener(new ActionListener() {
+        a14JugadoresRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                a10JugadoresRadioButton.setSelected(false);
+                a22JugadoresRadioButton.setSelected(false);
             }
         });
+
+        a22JugadoresRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                a10JugadoresRadioButton.setSelected(false);
+                a14JugadoresRadioButton.setSelected(false);
+            }
+        });
+
+        a10JugadoresRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                a14JugadoresRadioButton.setSelected(false);
+                a22JugadoresRadioButton.setSelected(false);
+            }
+        });
+
+
     }
 }
