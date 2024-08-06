@@ -34,6 +34,29 @@ public class MonitoreoCanchas {
     public MonitoreoCanchas() {
         imagenP.setPreferredSize(new Dimension(400, 200)); // Adjust the size as needed
         imagenP.setOpaque(true);
+        a14JugadoresRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                a10JugadoresRadioButton.setSelected(false);
+                a22JugadoresRadioButton.setSelected(false);
+            }
+        });
+
+        a22JugadoresRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                a10JugadoresRadioButton.setSelected(false);
+                a14JugadoresRadioButton.setSelected(false);
+            }
+        });
+
+        a10JugadoresRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                a14JugadoresRadioButton.setSelected(false);
+                a22JugadoresRadioButton.setSelected(false);
+            }
+        });
         buscarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -107,6 +130,59 @@ public class MonitoreoCanchas {
                     System.out.println(e1.getMessage());
 
                 }
+            }
+        });
+        actualizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try (Connection connection = DriverManager.getConnection(url,usuario,contraseña)) {
+                    String updateQuery = "UPDATE canchas SET nombre_cancha=?, ubicacion=?, estado=?, capacidad=? WHERE codigo=?";
+                    PreparedStatement ps = connection.prepareStatement(updateQuery);
+                    if(nombreCanchaT.getText().equals("")||ubicacionT.getText().equals("")|| (a14JugadoresRadioButton.isSelected() == false && a10JugadoresRadioButton.isSelected() == false && a22JugadoresRadioButton.isSelected() == false )){
+                        JOptionPane.showMessageDialog(null, "LLenar todos los parametros");
+                    } else{
+                        cancha.setNombreCancha(nombreCanchaT.getText());
+                        cancha.setUbicacion(ubicacionT.getText());
+                        cancha.setEstado(estadoT.getSelectedItem().toString());
+                        if (a14JugadoresRadioButton.isSelected() == true) {
+                            cancha.setCapacidad("14 jugadores");
+                        } else if (a10JugadoresRadioButton.isSelected() == true) {
+                            cancha.setCapacidad("10 jugadores");
+                        } else if (a22JugadoresRadioButton.isSelected() == true) {
+                            cancha.setCapacidad("22 jugadores");
+                        }
+                        cancha.setCodigo(codigoT.getText());
+
+
+                        ps.setString(1, cancha.getNombreCancha());
+                        ps.setString(2, cancha.getUbicacion());
+                        ps.setString(3, cancha.getEstado());
+                        ps.setString(4, cancha.getCapacidad());
+                        ps.setString(5, cancha.getCodigo());
+
+                        int actualizacion = ps.executeUpdate();
+                        if (actualizacion > 0) {
+                            JOptionPane.showMessageDialog(null, "Información actualizada con éxito");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se pudo actualizar la información");
+                        }
+                    }
+                }catch(SQLException e1){
+                    System.out.println(e1.getMessage());
+                }
+            }
+        });
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                codigoT.setText("");
+                nombreCanchaT.setText("");
+                estadoT.setSelectedIndex(0);
+                ubicacionT.setText("");
+                a14JugadoresRadioButton.setSelected(false);
+                a10JugadoresRadioButton.setSelected(false);
+                a22JugadoresRadioButton.setSelected(false);
+                imagenP.setIcon(null);
             }
         });
     }
