@@ -116,12 +116,12 @@
                   <text value="Agregar Encargados"/>
                 </properties>
               </component>
-              <component id="d5bcb" class="javax.swing.JButton" binding="asignacionDeHorariosButton" default-binding="true">
+              <component id="d5bcb" class="javax.swing.JButton" binding="monitoreoDeCanchasButton" default-binding="true">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Asignacion de horarios"/>
+                  <text value="Monitoreo de Canchas"/>
                 </properties>
               </component>
               <component id="923b3" class="javax.swing.JButton" binding="monitorioDeEncargadosButton" default-binding="true">
@@ -129,7 +129,7 @@
                   <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Monitorio de Encargados"/>
+                  <text value="Monitoreo de Encargados"/>
                 </properties>
               </component>
             </children>
