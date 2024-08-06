@@ -3,16 +3,16 @@ package org.example;
 public class Canchas {
     public String codigo;
     public String nombreCancha;
-    public String descripcionCancha;
+    public byte[] imagen;
     public String ubicacion;
     public String estado;
     public String capacidad;
     public Canchas() {}
 
-    public Canchas(String codigo, String nombreCancha, String descripcionCancha, String ubicacion, String estado, String capacidad) {
+    public Canchas(String codigo, String nombreCancha, byte[] imagen, String ubicacion, String estado, String capacidad) {
         this.codigo = codigo;
         this.nombreCancha = nombreCancha;
-        this.descripcionCancha = descripcionCancha;
+        this.imagen = imagen;
         this.ubicacion = ubicacion;
         this.estado = estado;
         this.capacidad = capacidad;
@@ -34,12 +34,12 @@ public class Canchas {
         this.codigo = codigo;
     }
 
-    public String getDescripcionCancha() {
-        return descripcionCancha;
+    public byte[] getImagen() {
+        return imagen;
     }
 
-    public void setDescripcionCancha(String descripcionCancha) {
-        this.descripcionCancha = descripcionCancha;
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
 
     public String getUbicacion() {
