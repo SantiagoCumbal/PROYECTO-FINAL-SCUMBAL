@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,7 +30,8 @@ public class RegistrarCanchas {
     private JRadioButton a14JugadoresRadioButton;
     private JButton cargarImagenButton;
     private JLabel ImagenP;
-
+    private JButton regresarButton;
+    private String nombreAdmin;
     public File selectFile;
 
     String url="jdbc:mysql://localhost:3306/Futbolito";
@@ -36,8 +40,9 @@ public class RegistrarCanchas {
     Canchas cancha = new Canchas();
     String sql="INSERT INTO canchas (codigo, nombre_cancha, imagen, ubicacion, estado, capacidad) VALUES (?,?,?,?,?,?)";
 
-    public RegistrarCanchas() {
-        ImagenP.setPreferredSize(new Dimension(200, 200)); // Adjust the size as needed
+    public RegistrarCanchas(String nombreAdmin) {
+        this.nombreAdmin = nombreAdmin;
+        ImagenP.setPreferredSize(new Dimension(400, 200)); // Adjust the size as needed
         ImagenP.setOpaque(true);
         a14JugadoresRadioButton.addActionListener(new ActionListener() {
             @Override
@@ -68,7 +73,7 @@ public class RegistrarCanchas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try(Connection connection = DriverManager.getConnection(url,usuario,contraseña)){
-                    if(codigoT.getText().equals("")||nombreCanchaT.getText().equals("")||ubicacionT.getText().equals("")|| (a14JugadoresRadioButton.isSelected() == false && a10JugadoresRadioButton.isSelected() == false && a22JugadoresRadioButton.isSelected() == false )){
+                    if(codigoT.getText().equals("")||nombreCanchaT.getText().equals("")||ubicacionT.getText().equals("")|| (a14JugadoresRadioButton.isSelected() == false && a10JugadoresRadioButton.isSelected() == false && a22JugadoresRadioButton.isSelected() == false ) || selectFile == null){
                         Error.setText("NO SE PUDO GUARDAR POR FAVOR INGRESE BIEN LOS PARAMETROS");
                     } else{
                         if (verificarCodigo(codigoT.getText())){
@@ -76,6 +81,15 @@ public class RegistrarCanchas {
                             cancha.setNombreCancha(nombreCanchaT.getText());
                             cancha.setEstado("Activo");
                             cancha.setUbicacion(ubicacionT.getText());
+
+                            byte[] imagenBytes = readImageFile(selectFile.toPath());
+                            if (imagenBytes != null) {
+                                cancha.setImagen(imagenBytes);
+                            } else {
+                                Error.setText("Error: la imagen no se pudo leer correctamente");
+                                return;
+                            }
+
                             if (a14JugadoresRadioButton.isSelected() == true) {
                                 cancha.setCapacidad("14 jugadores");
                             } else if (a10JugadoresRadioButton.isSelected() == true) {
@@ -86,9 +100,10 @@ public class RegistrarCanchas {
                             PreparedStatement ps=connection.prepareStatement(sql);
                             ps.setString(1, cancha.getCodigo());
                             ps.setString(2, cancha.getNombreCancha());
-                            ps.setString(3, cancha.getUbicacion());
-                            ps.setString(4, cancha.getEstado());
-                            ps.setString(4, cancha.getCapacidad());
+                            ps.setBytes(3, cancha.getImagen());
+                            ps.setString(4, cancha.getUbicacion());
+                            ps.setString(5, cancha.getEstado());
+                            ps.setString(6, cancha.getCapacidad());
                             ps.executeUpdate();
                             Error.setText("GUARDADO CON EXITO");
                         }else{
@@ -126,6 +141,40 @@ public class RegistrarCanchas {
                 }
             }
         });
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                codigoT.setText("");
+                nombreCanchaT.setText("");
+                ubicacionT.setText("");
+                a14JugadoresRadioButton.setSelected(false);
+                a10JugadoresRadioButton.setSelected(false);
+                a22JugadoresRadioButton.setSelected(false);
+                ImagenP.setIcon(null);
+                selectFile = null;
+                Error.setText("");
+            }
+        });
+        regresarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame();
+                frame.setContentPane(new InicioAdministracion(nombreAdmin).MainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
+                frame.setSize(500,300);
+                frame.setVisible(true);
+                ((JFrame)SwingUtilities.getWindowAncestor(regresarButton)).dispose();
+            }
+        });
+    }
+    public byte[] readImageFile(Path filePath) {
+        try {
+            return Files.readAllBytes(filePath);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            return null;
+        }
     }
     public boolean verificarCodigo(String codigo){
         String verficar = "^[0-9]{4}$";

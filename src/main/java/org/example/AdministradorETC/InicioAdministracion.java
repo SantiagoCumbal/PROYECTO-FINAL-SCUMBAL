@@ -31,7 +31,7 @@ public class InicioAdministracion {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame();
-                frame.setContentPane(new RegistrarCanchas().MainPanel);
+                frame.setContentPane(new RegistrarCanchas(nombre).MainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
                 frame.setSize(300,300);
