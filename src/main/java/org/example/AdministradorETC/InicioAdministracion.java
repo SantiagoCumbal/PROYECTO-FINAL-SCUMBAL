@@ -1,5 +1,7 @@
 package org.example.AdministradorETC;
 
+import org.example.Login;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,8 @@ public class InicioAdministracion {
     private JButton agregarEncargadosButton;
     private JButton monitoreoDeCanchasButton;
     private JButton monitorioDeEncargadosButton;
+    private JButton asignacionDeHorariosButton;
+    private JButton salirButton;
 
     public InicioAdministracion(String nombre) {
         name.setText("Sr/Sra "+nombre);
@@ -36,7 +40,7 @@ public class InicioAdministracion {
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
                 frame.setSize(300,300);
                 frame.setVisible(true);
-                ((JFrame)SwingUtilities.getWindowAncestor(agregarEncargadosButton)).dispose();
+                ((JFrame)SwingUtilities.getWindowAncestor(rergistrarCanchasButton)).dispose();
             }
         });
         monitorioDeEncargadosButton.addActionListener(new ActionListener() {
@@ -48,19 +52,43 @@ public class InicioAdministracion {
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
                 frame.setSize(300,300);
                 frame.setVisible(true);
-                ((JFrame)SwingUtilities.getWindowAncestor(agregarEncargadosButton)).dispose();
+                ((JFrame)SwingUtilities.getWindowAncestor(monitorioDeEncargadosButton)).dispose();
             }
         });
         monitoreoDeCanchasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame();
-                frame.setContentPane(new MonitoreoCanchas().MainPanel);
+                frame.setContentPane(new MonitoreoCanchas(nombre).MainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
                 frame.setSize(300,300);
                 frame.setVisible(true);
-                ((JFrame)SwingUtilities.getWindowAncestor(agregarEncargadosButton)).dispose();
+                ((JFrame)SwingUtilities.getWindowAncestor(monitoreoDeCanchasButton)).dispose();
+            }
+        });
+        asignacionDeHorariosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame();
+                frame.setContentPane(new AsignacionHorarios(nombre).MainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
+                frame.setSize(300,300);
+                frame.setVisible(true);
+                ((JFrame)SwingUtilities.getWindowAncestor(asignacionDeHorariosButton)).dispose();
+            }
+        });
+        salirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame();
+                frame.setContentPane(new Login().MainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
+                frame.setSize(400, 400);
+                frame.setVisible(true);
+                ((JFrame)SwingUtilities.getWindowAncestor(salirButton)).dispose();
             }
         });
     }

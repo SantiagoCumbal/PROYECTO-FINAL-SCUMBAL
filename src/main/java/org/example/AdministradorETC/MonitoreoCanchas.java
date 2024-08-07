@@ -26,12 +26,15 @@ public class MonitoreoCanchas {
     private JRadioButton a14JugadoresRadioButton;
     private JLabel codigoT;
     private JLabel imagenP;
+    private String nombreAdmin;
+
     String url="jdbc:mysql://localhost:3306/Futbolito";
     String usuario = "root";
     String contraseña= "12345";
     Canchas cancha=new Canchas();
 
-    public MonitoreoCanchas() {
+    public MonitoreoCanchas(String nombreAdmin) {
+        this.nombreAdmin = nombreAdmin;
         imagenP.setPreferredSize(new Dimension(400, 200)); // Adjust the size as needed
         imagenP.setOpaque(true);
         a14JugadoresRadioButton.addActionListener(new ActionListener() {
@@ -136,8 +139,15 @@ public class MonitoreoCanchas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try (Connection connection = DriverManager.getConnection(url,usuario,contraseña)) {
-                    String updateQuery = "UPDATE canchas SET nombre_cancha=?, ubicacion=?, estado=?, capacidad=? WHERE codigo=?";
-                    PreparedStatement ps = connection.prepareStatement(updateQuery);
+                    String updateQuery;
+                    PreparedStatement ps;
+                    if (estadoT.getSelectedItem().toString().equals("Inactivo")) {
+                        updateQuery = "UPDATE canchas SET nombre_cancha=?, ubicacion=?, estado=?, capacidad=?, horario_8='Bloqueado', cedula_reserva1=NULL, horario_10='Bloqueado', cedula_reserva2=NULL, horario_12='Bloqueado', cedula_reserva3=NULL, horario_14='Bloqueado', cedula_reserva4=NULL, horario_16='Bloqueado', cedula_reserva5=NULL, horario_18='Bloqueado', cedula_reserva6=NULL WHERE codigo=?";
+                        ps = connection.prepareStatement(updateQuery);
+                    } else {
+                        updateQuery = "UPDATE canchas SET nombre_cancha=?, ubicacion=?, estado=?, capacidad=? WHERE codigo=?";
+                        ps = connection.prepareStatement(updateQuery);
+                    }
                     if(nombreCanchaT.getText().equals("")||ubicacionT.getText().equals("")|| (a14JugadoresRadioButton.isSelected() == false && a10JugadoresRadioButton.isSelected() == false && a22JugadoresRadioButton.isSelected() == false )){
                         JOptionPane.showMessageDialog(null, "LLenar todos los parametros");
                     } else{
@@ -183,6 +193,18 @@ public class MonitoreoCanchas {
                 a10JugadoresRadioButton.setSelected(false);
                 a22JugadoresRadioButton.setSelected(false);
                 imagenP.setIcon(null);
+            }
+        });
+        regresarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame();
+                frame.setContentPane(new InicioAdministracion(nombreAdmin).MainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
+                frame.setSize(500,300);
+                frame.setVisible(true);
+                ((JFrame)SwingUtilities.getWindowAncestor(regresarButton)).dispose();
             }
         });
     }

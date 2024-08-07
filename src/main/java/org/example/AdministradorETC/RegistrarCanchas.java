@@ -38,7 +38,8 @@ public class RegistrarCanchas {
     String usuario = "root";
     String contraseña= "12345";
     Canchas cancha = new Canchas();
-    String sql="INSERT INTO canchas (codigo, nombre_cancha, imagen, ubicacion, estado, capacidad) VALUES (?,?,?,?,?,?)";
+    String sql="INSERT INTO canchas (codigo, nombre_cancha, imagen, ubicacion, estado, capacidad, horario_8, horario_10, horario_12, horario_14, horario_16, horario_18) " +
+            "VALUES (?, ?, ?, ?, ?, ?, 'Disponible', 'Disponible', 'Disponible', 'Disponible', 'Disponible', 'Disponible')";
 
     public RegistrarCanchas(String nombreAdmin) {
         this.nombreAdmin = nombreAdmin;
