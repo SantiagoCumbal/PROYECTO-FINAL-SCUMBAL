@@ -21,7 +21,6 @@ public class AgregarEncargados {
     private JButton guardarButton;
     private JButton cancelarButton;
     public JPanel MainPanel;
-    private JLabel Error;
     private JButton regresarButton;
     private String nombreAdmin;
     String url="jdbc:mysql://localhost:3306/Futbolito";
@@ -43,7 +42,7 @@ public class AgregarEncargados {
             public void actionPerformed(ActionEvent e) {
                 try(Connection connection = DriverManager.getConnection(url,usuario,contraseña)){
                     if(cedulaT.getText().equals("")||correoT.getText().equals("")||nombreT.getText().equals("")||contraseñaT.getText().equals("")||telefonoT.getText().equals("")||direccionT.getText().equals("")){
-                        Error.setText("NO SE PUDO GUARDAR POR FAVOR INGRESE BIEN LOS PARAMETROS");
+                        JOptionPane.showMessageDialog(null, "NO SE PUDO GUARDAR POR FAVOR INGRESE BIEN LOS PARAMETROS");
                     } else{
                         if (verificarCorreo(correoT.getText()) && verificarCedula(cedulaT.getText()) && verificarTelefono(telefonoT.getText())){
                             enc.setCedula(cedulaT.getText());
@@ -64,20 +63,20 @@ public class AgregarEncargados {
                             ps.setString(6,enc.getTelefono());
                             ps.setString(7,enc.getDireccion());
                             ps.executeUpdate();
-                            Error.setText("GUARDADO CON EXITO");
+                            JOptionPane.showMessageDialog(null, "Guardado con exito");
                         }else{
                             if (!verificarCorreo(correoT.getText())) {
-                                Error.setText("Correo invalido");
+                                JOptionPane.showMessageDialog(null, "Correo invalido");
                             } else if (!verificarCedula(cedulaT.getText())) {
-                                Error.setText("Cédula inválida");
+                                JOptionPane.showMessageDialog(null, "Cedula invalido");
                             } else if (!verificarTelefono(telefonoT.getText())) {
-                                Error.setText("Número de teléfono inválido");
+                                JOptionPane.showMessageDialog(null, "Telefono invalido");
                             }
                         }
                     }
                 }catch (SQLException e1){
                     System.out.println(e1.getMessage());
-                    Error.setText("Ya existe un encargado con esa cedula o correo");
+                    JOptionPane.showMessageDialog(null, "Ya existe un encargado con esa cedula o correo");
                 }
             }
         });
@@ -91,7 +90,6 @@ public class AgregarEncargados {
                 telefonoT.setText("");
                 direccionT.setText("");
                 contraseñaT.setText("");
-                Error.setText("");
             }
         });
         regresarButton.addActionListener(new ActionListener() {

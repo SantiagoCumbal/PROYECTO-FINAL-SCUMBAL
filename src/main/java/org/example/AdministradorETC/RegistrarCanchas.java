@@ -24,7 +24,6 @@ public class RegistrarCanchas {
     private JTextField ubicacionT;
     private JButton guardarButton;
     private JButton cancelarButton;
-    private JLabel Error;
     private JRadioButton a22JugadoresRadioButton;
     private JRadioButton a10JugadoresRadioButton;
     private JRadioButton a14JugadoresRadioButton;
@@ -75,7 +74,7 @@ public class RegistrarCanchas {
             public void actionPerformed(ActionEvent e) {
                 try(Connection connection = DriverManager.getConnection(url,usuario,contraseña)){
                     if(codigoT.getText().equals("")||nombreCanchaT.getText().equals("")||ubicacionT.getText().equals("")|| (a14JugadoresRadioButton.isSelected() == false && a10JugadoresRadioButton.isSelected() == false && a22JugadoresRadioButton.isSelected() == false ) || selectFile == null){
-                        Error.setText("NO SE PUDO GUARDAR POR FAVOR INGRESE BIEN LOS PARAMETROS");
+                        JOptionPane.showMessageDialog(null, "NO SE PUDO GUARDAR POR FAVOR INGRESE BIEN LOS PARAMETROS");
                     } else{
                         if (verificarCodigo(codigoT.getText())){
                             cancha.setCodigo(codigoT.getText());
@@ -87,7 +86,7 @@ public class RegistrarCanchas {
                             if (imagenBytes != null) {
                                 cancha.setImagen(imagenBytes);
                             } else {
-                                Error.setText("Error: la imagen no se pudo leer correctamente");
+                                JOptionPane.showMessageDialog(null, "Error: la imagen no se pudo leer correctamente");
                                 return;
                             }
 
@@ -106,14 +105,14 @@ public class RegistrarCanchas {
                             ps.setString(5, cancha.getEstado());
                             ps.setString(6, cancha.getCapacidad());
                             ps.executeUpdate();
-                            Error.setText("GUARDADO CON EXITO");
+                            JOptionPane.showMessageDialog(null, "GUARDADO CON EXITO");
                         }else{
-                            Error.setText("Codigo invalido");
+                            JOptionPane.showMessageDialog(null, "Codigo invalido");
                         }
                     }
                 }catch (SQLException e1){
                     System.out.println(e1.getMessage());
-                    Error.setText("Ya existe una cancha con ese codigo o nombre");
+                    JOptionPane.showMessageDialog(null, "Ya existe una cancha con ese codigo o nombre");
                 }
             }
         });
@@ -137,7 +136,7 @@ public class RegistrarCanchas {
                         ImagenP.setIcon(new ImageIcon(scaledImage));
 
                     } catch (Exception e1) {
-                        Error.setText("Error al cargar la imagen");
+                        JOptionPane.showMessageDialog(null, "Error al cargar la imagen");
                     }
                 }
             }
@@ -153,7 +152,6 @@ public class RegistrarCanchas {
                 a22JugadoresRadioButton.setSelected(false);
                 ImagenP.setIcon(null);
                 selectFile = null;
-                Error.setText("");
             }
         });
         regresarButton.addActionListener(new ActionListener() {

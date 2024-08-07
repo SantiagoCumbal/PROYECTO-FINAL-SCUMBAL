@@ -66,11 +66,12 @@ public class Login {
 
                         while(resultSet.next()){
                             if(enc.getCorreo().equals(resultSet.getString("correo")) && enc.getContraseña().equals(resultSet.getString("contraseña"))){
+                                enc.setNombre(resultSet.getString("nombre"));
                                 JFrame frame = new JFrame();
-                                frame.setContentPane(new InicioEncargado().MainPanel);
+                                frame.setContentPane(new InicioEncargado(enc.getNombre()).MainPanel);
                                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
-                                frame.setSize(700,700);
+                                frame.setSize(400,400);
                                 frame.setVisible(true);
                                 ((JFrame)SwingUtilities.getWindowAncestor(iniciarSesionButton)).dispose();
                             }else{

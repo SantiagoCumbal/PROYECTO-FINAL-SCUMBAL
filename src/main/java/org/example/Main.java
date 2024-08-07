@@ -1,5 +1,6 @@
 package org.example;
 import org.example.AdministradorETC.*;
+import org.example.EncargadoETC.DatosCanchas;
 
 import javax.swing.*;
 import java.awt.*;
