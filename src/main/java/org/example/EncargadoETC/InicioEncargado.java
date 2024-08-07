@@ -21,7 +21,7 @@ public class InicioEncargado {
                 frame.setContentPane(new ReservasCanchas(nombre).MainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
-                frame.setSize(400, 400);
+                frame.setSize(700, 700);
                 frame.setVisible(true);
                 ((JFrame)SwingUtilities.getWindowAncestor(reservarCanchasButton)).dispose();
             }
@@ -33,7 +33,7 @@ public class InicioEncargado {
                 frame.setContentPane(new DatosCanchas(nombre).MainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
-                frame.setSize(400, 400);
+                frame.setSize(700, 700);
                 frame.setVisible(true);
                 ((JFrame)SwingUtilities.getWindowAncestor(datosDeCanchasButton)).dispose();
             }

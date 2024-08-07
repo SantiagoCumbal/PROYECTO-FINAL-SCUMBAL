@@ -26,7 +26,7 @@ public class InicioAdministracion {
                 frame.setContentPane(new AgregarEncargados(nombre).MainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
-                frame.setSize(300,300);
+                frame.setSize(500,500);
                 frame.setVisible(true);
                 ((JFrame)SwingUtilities.getWindowAncestor(agregarEncargadosButton)).dispose();
             }
@@ -38,7 +38,7 @@ public class InicioAdministracion {
                 frame.setContentPane(new RegistrarCanchas(nombre).MainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
-                frame.setSize(300,300);
+                frame.setSize(700,700);
                 frame.setVisible(true);
                 ((JFrame)SwingUtilities.getWindowAncestor(rergistrarCanchasButton)).dispose();
             }
@@ -50,7 +50,7 @@ public class InicioAdministracion {
                 frame.setContentPane(new MonitoreoEncargados(nombre).MainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
-                frame.setSize(300,300);
+                frame.setSize(500,500);
                 frame.setVisible(true);
                 ((JFrame)SwingUtilities.getWindowAncestor(monitorioDeEncargadosButton)).dispose();
             }
@@ -62,7 +62,7 @@ public class InicioAdministracion {
                 frame.setContentPane(new MonitoreoCanchas(nombre).MainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
-                frame.setSize(300,300);
+                frame.setSize(700,700);
                 frame.setVisible(true);
                 ((JFrame)SwingUtilities.getWindowAncestor(monitoreoDeCanchasButton)).dispose();
             }
@@ -74,7 +74,7 @@ public class InicioAdministracion {
                 frame.setContentPane(new AsignacionHorarios(nombre).MainPanel);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
-                frame.setSize(300,300);
+                frame.setSize(700,700);
                 frame.setVisible(true);
                 ((JFrame)SwingUtilities.getWindowAncestor(asignacionDeHorariosButton)).dispose();
             }
