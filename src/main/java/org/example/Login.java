@@ -15,6 +15,7 @@ public class Login {
     private JTextField usuarioT;
     private JPasswordField contraseñaT;
     private JButton iniciarSesionButton;
+    private JLabel Error;
     String url="jdbc:mysql://localhost:3306/Futbolito";
     String usuario = "root";
     String contraseña= "12345";
@@ -48,7 +49,7 @@ public class Login {
                                 frame.setVisible(true);
                                 ((JFrame)SwingUtilities.getWindowAncestor(iniciarSesionButton)).dispose();
                             }else{
-                                JOptionPane.showMessageDialog(null, "Error de ingreso.");
+                                Error.setText("Error de ingreso");
                                 usuarioT.setText("");
                                 contraseñaT.setText("");
                             }
@@ -74,7 +75,7 @@ public class Login {
                                 frame.setVisible(true);
                                 ((JFrame)SwingUtilities.getWindowAncestor(iniciarSesionButton)).dispose();
                             }else{
-                                JOptionPane.showMessageDialog(null, "Error de ingreso.");
+                                Error.setText("Error de ingreso");
                                 usuarioT.setText("");
                                 contraseñaT.setText("");
                             }
