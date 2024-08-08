@@ -36,6 +36,7 @@ public class AgregarEncargados {
         int maximo=70;
         SpinnerNumberModel base = new SpinnerNumberModel(inicial,minimo,maximo,1);
         edadS.setModel(base);
+        edadS.setEnabled(true);
 
         guardarButton.addActionListener(new ActionListener() {
             @Override

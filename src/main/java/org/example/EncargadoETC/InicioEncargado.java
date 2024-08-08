@@ -1,5 +1,7 @@
 package org.example.EncargadoETC;
 
+import org.example.Login;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,6 +38,18 @@ public class InicioEncargado {
                 frame.setSize(700, 700);
                 frame.setVisible(true);
                 ((JFrame)SwingUtilities.getWindowAncestor(datosDeCanchasButton)).dispose();
+            }
+        });
+        salirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame();
+                frame.setContentPane(new Login().MainPanel);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/resources/Imagenes/logo.jpg"));
+                frame.setSize(400, 400);
+                frame.setVisible(true);
+                ((JFrame)SwingUtilities.getWindowAncestor(salirButton)).dispose();
             }
         });
     }

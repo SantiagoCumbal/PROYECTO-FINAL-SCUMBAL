@@ -344,6 +344,12 @@ public class ReservasCanchas {
                 ((JFrame)SwingUtilities.getWindowAncestor(regresarButton)).dispose();
             }
         });
+        cedulaT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
     public boolean verificarCodigo(String codigo){
         String verficar = "^[0-9]{4}$";
